@@ -3,9 +3,13 @@ import { onboardingChecklists } from '../../data/checklists'
 
 interface EmployeeCardProps {
   employee: Employee
+  onSelectEmployee: (employee: Employee) => void
 }
 
-export function EmployeeCard({ employee }: EmployeeCardProps) {
+export function EmployeeCard({
+  employee,
+  onSelectEmployee,
+}: EmployeeCardProps) {
   const checklist = onboardingChecklists[employee.phaseId]
 
   const completedTasks = checklist.filter((task) =>
@@ -52,6 +56,14 @@ export function EmployeeCard({ employee }: EmployeeCardProps) {
           />
         </div>
       </div>
+
+      <button
+        type="button"
+        onClick={() => onSelectEmployee(employee)}
+        className="mt-5 w-full rounded-xl bg-primary-blue px-4 py-2 text-sm font-bold text-white transition hover:bg-midnight-blue"
+      >
+        Zobrazit detail
+      </button>
     </article>
   )
 }
