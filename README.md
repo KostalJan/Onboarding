@@ -39,3 +39,12 @@ Each phase contains tasks that need to be completed before the employee can move
 
 Project setup is completed.  
 The next step is to configure Tailwind CSS and create the basic application layout.
+
+## Checklist Architecture
+
+Checklist tasks are centrally defined for each onboarding phase.
+
+Employees do not store full task objects.  
+Instead, they only store IDs of completed tasks.
+
+This approach keeps the application architecture cleaner and allows onboarding templates to be reused across multiple employees.
