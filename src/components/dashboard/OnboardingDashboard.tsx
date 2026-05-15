@@ -3,6 +3,7 @@ import type { Employee } from "../../types/onboarding";
 import { initialEmployees } from "../../data/employees";
 import { onboardingPhases } from "../../data/phases";
 import { OnboardingColumn } from "./OnboardingColumn";
+import { EmployeeDetail } from "./EmployeeDetail";
 
 export function OnboardingDashboard() {
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
@@ -12,7 +13,6 @@ export function OnboardingDashboard() {
   return (
     <div>
       <header className="mb-12">
-
         <h1 className="mt-4 text-5xl font-bold leading-tight text-primary-blue">
           Onboarding Dashboard
         </h1>
@@ -40,17 +40,7 @@ export function OnboardingDashboard() {
         })}
       </div>
 
-      {selectedEmployee && (
-        <section className="mt-8 rounded-3xl border border-primary-blue/10 bg-white/70 p-6 shadow-sm">
-          <h2 className="text-2xl font-bold text-primary-blue">
-            Detail zaměstnance
-          </h2>
-
-          <p className="mt-2 text-midnight-blue/70">
-            {selectedEmployee.firstName} {selectedEmployee.lastName}
-          </p>
-        </section>
-      )}
+      {selectedEmployee && <EmployeeDetail employee={selectedEmployee} />}
     </div>
   );
 }
