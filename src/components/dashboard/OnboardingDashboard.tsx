@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import type { Employee } from '../../types/onboarding'
-import { initialEmployees } from '../../data/employees'
-import { onboardingPhases } from '../../data/phases'
-import { OnboardingColumn } from './OnboardingColumn'
+import { useState } from "react";
+import type { Employee } from "../../types/onboarding";
+import { initialEmployees } from "../../data/employees";
+import { onboardingPhases } from "../../data/phases";
+import { OnboardingColumn } from "./OnboardingColumn";
 
 export function OnboardingDashboard() {
-  const [selectedEmployee, setSelectedEmployee] =
-    useState<Employee | null>(null)
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
+    null,
+  );
 
   return (
     <div>
-      <header className="mb-10">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary-blue">
+      <header className="mb-12">
+        <p className="text-base font-medium uppercase tracking-[0.2em] text-primary-blue">
           HR onboarding
         </p>
 
-        <h1 className="mt-3 text-4xl font-bold text-primary-blue">
+        <h1 className="mt-4 text-5xl font-bold leading-tight text-primary-blue">
           Onboarding dashboard
         </h1>
 
-        <p className="mt-4 max-w-2xl text-base text-midnight-blue/75">
-          Přehled zaměstnanců podle fáze onboardingu a aktuálního postupu
-          v checklistu.
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-midnight-blue/75">
+          Přehled zaměstnanců podle fáze onboardingu a aktuálního postupu v
+          checklistu.
         </p>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-8 xl:grid-cols-3">
         {onboardingPhases.map((phase) => {
           const employeesInPhase = initialEmployees.filter(
             (employee) => employee.phaseId === phase.id,
-          )
+          );
 
           return (
             <OnboardingColumn
@@ -38,7 +39,7 @@ export function OnboardingDashboard() {
               employees={employeesInPhase}
               onSelectEmployee={setSelectedEmployee}
             />
-          )
+          );
         })}
       </div>
 
@@ -54,5 +55,5 @@ export function OnboardingDashboard() {
         </section>
       )}
     </div>
-  )
+  );
 }

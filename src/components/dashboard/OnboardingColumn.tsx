@@ -14,13 +14,12 @@ export function OnboardingColumn({
   onSelectEmployee,
 }: OnboardingColumnProps) {
   return (
-    <section className="rounded-3xl border border-primary-blue/10 bg-white/60 p-5 shadow-sm">
-      <div className="mb-5">
-        <h2 className="text-xl font-bold text-primary-blue">
+<section className="rounded-3xl border border-primary-blue/10 bg-white/70 p-6 shadow-sm">      <div className="mb-5">
+        <h2 className="text-2xl font-bold text-primary-blue">
           {phase.title}
         </h2>
 
-        <p className="mt-2 text-sm leading-5 text-midnight-blue/65">
+        <p className="mt-3 text-base leading-7 text-midnight-blue/65">
           {phase.description}
         </p>
       </div>
@@ -35,7 +34,7 @@ export function OnboardingColumn({
             />
           ))
         ) : (
-          <p className="rounded-2xl border border-dashed border-primary-blue/25 bg-pearl-white p-4 text-sm text-midnight-blue/50">
+          <p className="rounded-2xl border border-dashed border-primary-blue/25 bg-pearl-white p-5 text-base text-midnight-blue/50">
             V této fázi zatím není žádný zaměstnanec.
           </p>
         )}

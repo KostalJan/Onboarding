@@ -1,52 +1,45 @@
-import type { Employee } from '../../types/onboarding'
-import { onboardingChecklists } from '../../data/checklists'
+import type { Employee } from "../../types/onboarding";
+import { onboardingChecklists } from "../../data/checklists";
 
 interface EmployeeCardProps {
-  employee: Employee
-  onSelectEmployee: (employee: Employee) => void
+  employee: Employee;
+  onSelectEmployee: (employee: Employee) => void;
 }
 
 export function EmployeeCard({
   employee,
   onSelectEmployee,
 }: EmployeeCardProps) {
-  const checklist = onboardingChecklists[employee.phaseId]
+  const checklist = onboardingChecklists[employee.phaseId];
 
   const completedTasks = checklist.filter((task) =>
     employee.completedTaskIds.includes(task.id),
-  )
+  );
 
-  const progress = Math.round(
-    (completedTasks.length / checklist.length) * 100,
-  )
+  const progress = Math.round((completedTasks.length / checklist.length) * 100);
 
   return (
-    <article className="rounded-2xl border border-primary-blue/10 bg-pearl-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <article className="rounded-3xl border border-primary-blue/10 bg-pearl-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+      {" "}
       <div>
-        <h3 className="text-lg font-bold text-primary-blue">
+        <h3 className="text-2xl font-bold text-primary-blue">
           {employee.firstName} {employee.lastName}
         </h3>
 
-        <p className="mt-1 text-sm font-medium text-sky-blue">
+        <p className="mt-2 text-base font-medium text-sky-blue">
           {employee.position}
         </p>
       </div>
-
-      <div className="mt-4 space-y-1 text-sm text-midnight-blue/70">
+      <div className="mt-5 space-y-2 text-base leading-7 text-midnight-blue/70">
         <p>Oddělení: {employee.department}</p>
         <p>Manažer: {employee.managerName}</p>
         <p>Nástup: {employee.startDate}</p>
       </div>
+      <div className="mt-6">
+        <div className="mb-3 flex justify-between text-base">
+          <span className="font-medium text-midnight-blue/70">Progress</span>
 
-      <div className="mt-5">
-        <div className="mb-2 flex justify-between text-sm">
-          <span className="font-medium text-midnight-blue/70">
-            Progress
-          </span>
-
-          <span className="font-bold text-primary-blue">
-            {progress} %
-          </span>
+          <span className="font-bold text-primary-blue">{progress} %</span>
         </div>
 
         <div className="h-2.5 rounded-full bg-primary-blue/10">
@@ -56,14 +49,13 @@ export function EmployeeCard({
           />
         </div>
       </div>
-
       <button
         type="button"
         onClick={() => onSelectEmployee(employee)}
-        className="mt-5 w-full rounded-xl bg-primary-blue px-4 py-2 text-sm font-bold text-white transition hover:bg-midnight-blue"
+        className="mt-6 w-full rounded-2xl bg-primary-blue px-5 py-3 text-base font-bold text-white transition hover:bg-midnight-blue"
       >
         Zobrazit detail
       </button>
     </article>
-  )
+  );
 }
