@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "AmpleSoft Pro";
+  src: url("/fonts/AmpleSoftPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "AmpleSoft Pro";
+  src: url("/fonts/AmpleSoftPro-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "AmpleSoft Pro";
+  src: url("/fonts/AmpleSoftPro-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+@theme {
+  --font-sans: "AmpleSoft Pro", sans-serif;
+
+  --color-pearl-white: #f6f4f3;
+  --color-primary-blue: #124d91;
+  --color-midnight-blue: #312978;
+  --color-sky-blue: #56a8dd;
+}

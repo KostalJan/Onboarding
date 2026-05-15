@@ -17,34 +17,37 @@ export function EmployeeCard({ employee }: EmployeeCardProps) {
   )
 
   return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <article className="rounded-2xl border border-primary-blue/10 bg-pearl-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <div>
-        <h3 className="font-semibold text-slate-900">
+        <h3 className="text-lg font-bold text-primary-blue">
           {employee.firstName} {employee.lastName}
         </h3>
 
-        <p className="text-sm text-slate-500">
+        <p className="mt-1 text-sm font-medium text-sky-blue">
           {employee.position}
         </p>
       </div>
 
-      <div className="mt-4 text-sm text-slate-600">
+      <div className="mt-4 space-y-1 text-sm text-midnight-blue/70">
         <p>Oddělení: {employee.department}</p>
         <p>Manažer: {employee.managerName}</p>
         <p>Nástup: {employee.startDate}</p>
       </div>
 
-      <div className="mt-4">
-        <div className="mb-1 flex justify-between text-sm">
-          <span className="text-slate-600">Progress</span>
-          <span className="font-medium text-slate-900">
+      <div className="mt-5">
+        <div className="mb-2 flex justify-between text-sm">
+          <span className="font-medium text-midnight-blue/70">
+            Progress
+          </span>
+
+          <span className="font-bold text-primary-blue">
             {progress} %
           </span>
         </div>
 
-        <div className="h-2 rounded-full bg-slate-200">
+        <div className="h-2.5 rounded-full bg-primary-blue/10">
           <div
-            className="h-2 rounded-full bg-slate-900"
+            className="h-2.5 rounded-full bg-primary-blue"
             style={{ width: `${progress}%` }}
           />
         </div>

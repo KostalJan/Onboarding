@@ -5,16 +5,16 @@ import { OnboardingColumn } from './OnboardingColumn'
 export function OnboardingDashboard() {
   return (
     <div>
-      <header className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-wide text-slate-500">
+      <header className="mb-10">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary-blue">
           HR onboarding
         </p>
 
-        <h1 className="mt-2 text-3xl font-bold text-slate-950">
+        <h1 className="mt-3 text-4xl font-bold text-primary-blue">
           Onboarding dashboard
         </h1>
 
-        <p className="mt-3 max-w-2xl text-slate-600">
+        <p className="mt-4 max-w-2xl text-base font-regular text-midnight-blue/75">
           Přehled zaměstnanců podle fáze onboardingu a aktuálního postupu
           v checklistu.
         </p>
