@@ -199,3 +199,66 @@ Planned next steps:
 
 - User interface: Czech
 - Documentation: English
+
+
+# Installation and Setup
+
+To run the project locally, follow these steps:
+
+## 1. Clone Repository
+
+```bash
+git clone <repository-url>
+```
+
+## 2. Navigate to Project Folder
+
+```bash
+cd onboarding
+```
+
+## 3. Install Dependencies
+
+```bash
+npm install
+```
+
+## 4. Run Development Server
+
+```bash
+npm run dev
+```
+
+The application will be available at:
+
+```txt
+http://localhost:5173
+```
+
+---
+
+# Available Scripts
+
+## Start Development Server
+
+Runs the application in development mode.
+
+```bash
+npm run dev
+```
+
+## Build Production Version
+
+Creates an optimized production build.
+
+```bash
+npm run build
+```
+
+## Preview Production Build
+
+Runs a local preview of the production build.
+
+```bash
+npm run preview
+```
