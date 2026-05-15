@@ -12,12 +12,9 @@ export function OnboardingDashboard() {
   return (
     <div>
       <header className="mb-12">
-        <p className="text-base font-medium uppercase tracking-[0.2em] text-primary-blue">
-          HR onboarding
-        </p>
 
         <h1 className="mt-4 text-5xl font-bold leading-tight text-primary-blue">
-          Onboarding dashboard
+          Onboarding Dashboard
         </h1>
 
         <p className="mt-5 max-w-3xl text-lg leading-8 text-midnight-blue/75">

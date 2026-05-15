@@ -1,5 +1,6 @@
 import type { Employee } from "../../types/onboarding";
 import { onboardingChecklists } from "../../data/checklists";
+import { formatDate } from "../../utils/formatDate";
 
 interface EmployeeCardProps {
   employee: Employee;
@@ -32,8 +33,13 @@ export function EmployeeCard({
       </div>
       <div className="mt-5 space-y-2 text-base leading-7 text-midnight-blue/70">
         <p>Oddělení: {employee.department}</p>
-        <p>Manažer: {employee.managerName}</p>
-        <p>Nástup: {employee.startDate}</p>
+
+        <p>
+          Nástup:{" "}
+          <span className="font-medium text-midnight-blue">
+            {formatDate(employee.startDate)}
+          </span>
+        </p>
       </div>
       <div className="mt-6">
         <div className="mb-3 flex justify-between text-base">
