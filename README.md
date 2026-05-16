@@ -17,8 +17,9 @@ Managers can:
 - monitor completed tasks
 - view employee onboarding details
 - manage onboarding checklists
+- move employees between onboarding phases
 
-The application currently works as a frontend-focused prototype using Local Storage architecture.
+The application currently works as a frontend-focused prototype using Local Storage persistence.
 
 ---
 
@@ -30,6 +31,7 @@ The application currently works as a frontend-focused prototype using Local Stor
 - Employee cards grouped by onboarding phase
 - Progress visualization
 - Responsive dashboard layout
+- Dynamic side detail panel
 
 ## Employee Cards
 
@@ -49,6 +51,9 @@ The detail panel includes:
 - onboarding checklist
 - completed task visualization
 - onboarding metadata
+- onboarding phase controls
+- close action
+- sticky side panel behavior
 
 ## Checklist System
 
@@ -56,6 +61,29 @@ The detail panel includes:
 - Shared checklist architecture
 - Progress calculated dynamically
 - Task completion based on task IDs
+- Interactive checklist completion
+
+## Onboarding Workflow
+
+Employees can move between onboarding phases.
+
+Rules:
+
+- Moving backward is always allowed
+- Moving forward requires all checklist tasks to be completed
+- Checklist progress resets after phase transition
+
+## Local Storage Persistence
+
+The application persists onboarding state using Local Storage.
+
+Persisted data includes:
+
+- onboarding phase
+- completed tasks
+- onboarding progress
+
+State is automatically restored after page refresh.
 
 ## UI / Design
 
@@ -64,6 +92,7 @@ The detail panel includes:
 - Responsive layout
 - AmpleSoft Pro typography
 - Modern card-based interface
+- Dynamic layout behavior
 
 ---
 
@@ -83,7 +112,9 @@ The detail panel includes:
 
 The project currently uses a frontend-only architecture.
 
-Application state is handled locally and onboarding data is prepared for Local Storage persistence.
+Application state is managed using React state and persisted via Local Storage.
+
+The architecture is designed for future scalability and possible backend integration.
 
 ---
 
@@ -151,6 +182,25 @@ The onboarding progress is calculated dynamically based on completed tasks and c
 
 ---
 
+# Local Storage Architecture
+
+Local Storage utilities are separated into:
+
+```txt
+src/utils/localStorage.ts
+```
+
+Persistence logic is intentionally separated from UI components.
+
+This approach improves:
+
+- maintainability
+- scalability
+- separation of concerns
+- future backend migration
+
+---
+
 # Current Development Status
 
 Currently implemented:
@@ -159,19 +209,21 @@ Currently implemented:
 - onboarding columns
 - employee cards
 - employee detail panel
-- onboarding checklist UI
+- interactive onboarding checklist
+- onboarding phase transitions
+- Local Storage persistence
 - progress tracking
 - responsive layout
 - branded design system
+- dynamic side panel layout
 
 Planned next steps:
 
-- interactive task completion
-- Local Storage persistence
 - onboarding statistics
 - filtering
 - search
 - animations and microinteractions
+- drag and drop interactions
 - authentication simulation
 - manager session handling
 
@@ -200,6 +252,7 @@ Planned next steps:
 - User interface: Czech
 - Documentation: English
 
+---
 
 # Installation and Setup
 
