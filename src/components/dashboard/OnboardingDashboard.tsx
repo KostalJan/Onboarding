@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { initialEmployees } from "../../data/employees";
 import { onboardingPhases } from "../../data/phases";
 import { OnboardingColumn } from "./OnboardingColumn";
 import { EmployeeDetail } from "./EmployeeDetail";
+import { loadEmployees, saveEmployees } from "../../utils/localStorage";
 
 export function OnboardingDashboard() {
-  const [employees, setEmployees] = useState(initialEmployees);
+  const [employees, setEmployees] = useState(() => {
+    return loadEmployees() ?? initialEmployees;
+  });
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(
     null,
   );
@@ -35,11 +38,15 @@ export function OnboardingDashboard() {
     );
   };
 
+  useEffect(() => {
+    saveEmployees(employees);
+  }, [employees]);
+
   return (
     <div
       className={
         selectedEmployee
-      ? "mx-auto w-full max-w-[1500px]"
+          ? "mx-auto w-full max-w-[1500px]"
           : "mx-auto w-full max-w-7xl"
       }
     >
