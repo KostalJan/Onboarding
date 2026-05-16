@@ -59,7 +59,9 @@ export function OnboardingDashboard() {
               key={phase.id}
               phase={phase}
               employees={employeesInPhase}
-              onSelectEmployee={(employee) => setSelectedEmployeeId(employee.id)}
+              onSelectEmployee={(employee) =>
+                setSelectedEmployeeId(employee.id)
+              }
             />
           );
         })}
@@ -69,6 +71,7 @@ export function OnboardingDashboard() {
         <EmployeeDetail
           employee={selectedEmployee}
           onToggleTask={handleToggleTask}
+          onClose={() => setSelectedEmployeeId(null)}
         />
       )}
     </div>

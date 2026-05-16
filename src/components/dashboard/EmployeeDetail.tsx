@@ -6,11 +6,13 @@ import { formatDate } from "../../utils/formatDate";
 interface EmployeeDetailProps {
   employee: Employee;
   onToggleTask: (employeeId: string, taskId: string) => void;
+  onClose: () => void;
 }
 
 export function EmployeeDetail({
   employee,
   onToggleTask,
+  onClose,
 }: EmployeeDetailProps) {
   const checklist = onboardingChecklists[employee.phaseId];
 
@@ -32,26 +34,34 @@ export function EmployeeDetail({
             {employee.position} · {employee.department}
           </p>
         </div>
+        <div className="flex items-start gap-4">
+          <div className="rounded-2xl bg-pearl-white px-5 py-4 text-base text-midnight-blue/75">
+            <p>
+              Fáze:{" "}
+              <span className="font-bold text-primary-blue">
+                {phase?.title}
+              </span>
+            </p>
 
-        <div className="rounded-2xl bg-pearl-white px-5 py-4 text-base text-midnight-blue/75">
-          <p>
-            Fáze:{" "}
-            <span className="font-bold text-primary-blue">{phase?.title}</span>
-          </p>
-
-          <p className="mt-1">
-            Nástup:{" "}
-            <span className="font-bold text-primary-blue">
-              {formatDate(employee.startDate)}
-            </span>
-          </p>
+            <p className="mt-1">
+              Nástup:{" "}
+              <span className="font-bold text-primary-blue">
+                {formatDate(employee.startDate)}
+              </span>
+            </p>
+          </div>
         </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-2xl border border-primary-blue/10 bg-white px-5 py-4 text-base font-medium text-midnight-blue transition hover:border-primary-blue/30 hover:text-primary-blue"
+        >
+          Zavřít
+        </button>
       </div>
 
       <div>
-        <h3 className="mb-5 text-2xl font-bold text-primary-blue">
-          Checklist
-        </h3>
+        <h3 className="mb-5 text-2xl font-bold text-primary-blue">Checklist</h3>
 
         <div className="grid gap-4 lg:grid-cols-2">
           {checklist.map((task) => {
