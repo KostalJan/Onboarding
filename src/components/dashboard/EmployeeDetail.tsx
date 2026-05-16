@@ -19,9 +19,16 @@ export function EmployeeDetail({
   const phase = onboardingPhases.find((phase) => phase.id === employee.phaseId);
 
   return (
-    <section className="mt-10 rounded-3xl border border-primary-blue/10 bg-white/80 p-8 shadow-sm">
-      <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-        <div>
+    <section className="relative rounded-3xl border border-primary-blue/10 bg-white/80 p-7 shadow-sm xl:sticky xl:top-8 xl:self-start">
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-xl border border-primary-blue/10 bg-white text-xl font-medium text-midnight-blue transition hover:border-primary-blue/30 hover:text-primary-blue"
+      >
+        ×
+      </button>
+      <div className="mb-8 flex flex-col gap-6">
+        <div className="min-w-0 flex-1">
           <p className="text-base font-medium uppercase tracking-[0.2em] text-sky-blue">
             Detail zaměstnance
           </p>
@@ -30,12 +37,12 @@ export function EmployeeDetail({
             {employee.firstName} {employee.lastName}
           </h2>
 
-          <p className="mt-2 text-lg font-medium text-midnight-blue/70">
+          <p className="mt-2 text-lg font-medium leading-7 text-midnight-blue/70">
             {employee.position} · {employee.department}
           </p>
         </div>
-        <div className="flex items-start gap-4">
-          <div className="rounded-2xl bg-pearl-white px-5 py-4 text-base text-midnight-blue/75">
+        <div className="flex items-start justify-between gap-4">
+          <div className="rounded-2xl bg-pearl-white px-4 py-3 text-sm text-midnight-blue/75">
             <p>
               Fáze:{" "}
               <span className="font-bold text-primary-blue">
@@ -51,19 +58,11 @@ export function EmployeeDetail({
             </p>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-2xl border border-primary-blue/10 bg-white px-5 py-4 text-base font-medium text-midnight-blue transition hover:border-primary-blue/30 hover:text-primary-blue"
-        >
-          Zavřít
-        </button>
       </div>
-
       <div>
         <h3 className="mb-5 text-2xl font-bold text-primary-blue">Checklist</h3>
 
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4">
           {checklist.map((task) => {
             const isCompleted = employee.completedTaskIds.includes(task.id);
 

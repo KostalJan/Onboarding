@@ -36,7 +36,13 @@ export function OnboardingDashboard() {
   };
 
   return (
-    <div>
+    <div
+      className={
+        selectedEmployee
+      ? "mx-auto w-full max-w-[1500px]"
+          : "mx-auto w-full max-w-7xl"
+      }
+    >
       <header className="mb-12">
         <h1 className="mt-4 text-5xl font-bold leading-tight text-primary-blue">
           Onboarding Dashboard
@@ -47,33 +53,44 @@ export function OnboardingDashboard() {
           checklistu.
         </p>
       </header>
-
-      <div className="grid gap-8 xl:grid-cols-3">
+      <div
+        className={
+          selectedEmployee
+            ? "flex items-start gap-8 overflow-x-auto pb-6"
+            : "grid gap-8 xl:grid-cols-3"
+        }
+      >
         {onboardingPhases.map((phase) => {
           const employeesInPhase = employees.filter(
             (employee) => employee.phaseId === phase.id,
           );
 
           return (
-            <OnboardingColumn
+            <div
               key={phase.id}
-              phase={phase}
-              employees={employeesInPhase}
-              onSelectEmployee={(employee) =>
-                setSelectedEmployeeId(employee.id)
-              }
-            />
+              className={selectedEmployee ? "w-[320px] shrink-0" : ""}
+            >
+              <OnboardingColumn
+                phase={phase}
+                employees={employeesInPhase}
+                onSelectEmployee={(employee) =>
+                  setSelectedEmployeeId(employee.id)
+                }
+              />
+            </div>
           );
         })}
-      </div>
 
-      {selectedEmployee && (
-        <EmployeeDetail
-          employee={selectedEmployee}
-          onToggleTask={handleToggleTask}
-          onClose={() => setSelectedEmployeeId(null)}
-        />
-      )}
+        {selectedEmployee && (
+          <div className="w-[380px] shrink-0">
+            <EmployeeDetail
+              employee={selectedEmployee}
+              onToggleTask={handleToggleTask}
+              onClose={() => setSelectedEmployeeId(null)}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
