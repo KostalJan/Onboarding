@@ -1,14 +1,39 @@
 import { useState } from "react";
-import type { Employee } from "../../types/onboarding";
 import { initialEmployees } from "../../data/employees";
 import { onboardingPhases } from "../../data/phases";
 import { OnboardingColumn } from "./OnboardingColumn";
 import { EmployeeDetail } from "./EmployeeDetail";
 
 export function OnboardingDashboard() {
-  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
+  const [employees, setEmployees] = useState(initialEmployees);
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<string | null>(
     null,
   );
+
+  const selectedEmployee = employees.find(
+    (employee) => employee.id === selectedEmployeeId,
+  );
+
+  const handleToggleTask = (employeeId: string, taskId: string) => {
+    setEmployees((currentEmployees) =>
+      currentEmployees.map((employee) => {
+        if (employee.id !== employeeId) {
+          return employee;
+        }
+
+        const isCompleted = employee.completedTaskIds.includes(taskId);
+
+        return {
+          ...employee,
+          completedTaskIds: isCompleted
+            ? employee.completedTaskIds.filter(
+                (completedTaskId) => completedTaskId !== taskId,
+              )
+            : [...employee.completedTaskIds, taskId],
+        };
+      }),
+    );
+  };
 
   return (
     <div>
@@ -25,7 +50,7 @@ export function OnboardingDashboard() {
 
       <div className="grid gap-8 xl:grid-cols-3">
         {onboardingPhases.map((phase) => {
-          const employeesInPhase = initialEmployees.filter(
+          const employeesInPhase = employees.filter(
             (employee) => employee.phaseId === phase.id,
           );
 
@@ -34,13 +59,18 @@ export function OnboardingDashboard() {
               key={phase.id}
               phase={phase}
               employees={employeesInPhase}
-              onSelectEmployee={setSelectedEmployee}
+              onSelectEmployee={(employee) => setSelectedEmployeeId(employee.id)}
             />
           );
         })}
       </div>
 
-      {selectedEmployee && <EmployeeDetail employee={selectedEmployee} />}
+      {selectedEmployee && (
+        <EmployeeDetail
+          employee={selectedEmployee}
+          onToggleTask={handleToggleTask}
+        />
+      )}
     </div>
   );
 }

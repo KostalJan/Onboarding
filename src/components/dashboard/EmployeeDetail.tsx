@@ -1,18 +1,20 @@
-import type { Employee } from '../../types/onboarding'
-import { onboardingChecklists } from '../../data/checklists'
-import { onboardingPhases } from '../../data/phases'
-import { formatDate } from '../../utils/formatDate'
+import type { Employee } from "../../types/onboarding";
+import { onboardingChecklists } from "../../data/checklists";
+import { onboardingPhases } from "../../data/phases";
+import { formatDate } from "../../utils/formatDate";
 
 interface EmployeeDetailProps {
-  employee: Employee
+  employee: Employee;
+  onToggleTask: (employeeId: string, taskId: string) => void;
 }
 
-export function EmployeeDetail({ employee }: EmployeeDetailProps) {
-  const checklist = onboardingChecklists[employee.phaseId]
+export function EmployeeDetail({
+  employee,
+  onToggleTask,
+}: EmployeeDetailProps) {
+  const checklist = onboardingChecklists[employee.phaseId];
 
-  const phase = onboardingPhases.find(
-    (phase) => phase.id === employee.phaseId,
-  )
+  const phase = onboardingPhases.find((phase) => phase.id === employee.phaseId);
 
   return (
     <section className="mt-10 rounded-3xl border border-primary-blue/10 bg-white/80 p-8 shadow-sm">
@@ -33,14 +35,12 @@ export function EmployeeDetail({ employee }: EmployeeDetailProps) {
 
         <div className="rounded-2xl bg-pearl-white px-5 py-4 text-base text-midnight-blue/75">
           <p>
-            Fáze:{' '}
-            <span className="font-bold text-primary-blue">
-              {phase?.title}
-            </span>
+            Fáze:{" "}
+            <span className="font-bold text-primary-blue">{phase?.title}</span>
           </p>
 
           <p className="mt-1">
-            Nástup:{' '}
+            Nástup:{" "}
             <span className="font-bold text-primary-blue">
               {formatDate(employee.startDate)}
             </span>
@@ -55,31 +55,33 @@ export function EmployeeDetail({ employee }: EmployeeDetailProps) {
 
         <div className="grid gap-4 lg:grid-cols-2">
           {checklist.map((task) => {
-            const isCompleted = employee.completedTaskIds.includes(task.id)
+            const isCompleted = employee.completedTaskIds.includes(task.id);
 
             return (
-              <div
+              <button
                 key={task.id}
-                className="flex items-center gap-4 rounded-2xl border border-primary-blue/10 bg-pearl-white p-5"
+                type="button"
+                onClick={() => onToggleTask(employee.id, task.id)}
+                className="flex items-center gap-4 rounded-2xl border border-primary-blue/10 bg-pearl-white p-5 text-left transition hover:border-primary-blue/30 hover:bg-white"
               >
                 <div
                   className={
                     isCompleted
-                      ? 'flex h-7 w-7 items-center justify-center rounded-full bg-primary-blue text-white'
-                      : 'h-7 w-7 rounded-full border-2 border-primary-blue/30'
+                      ? "flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-blue text-white"
+                      : "h-7 w-7 shrink-0 rounded-full border-2 border-primary-blue/30"
                   }
                 >
-                  {isCompleted ? '✓' : null}
+                  {isCompleted ? "✓" : null}
                 </div>
 
                 <p className="text-lg font-medium text-midnight-blue">
                   {task.title}
                 </p>
-              </div>
-            )
+              </button>
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
