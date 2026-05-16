@@ -38,6 +38,22 @@ export function OnboardingDashboard() {
     );
   };
 
+  const handleChangePhase = (employeeId: string, nextPhaseId: string) => {
+    setEmployees((currentEmployees) =>
+      currentEmployees.map((employee) => {
+        if (employee.id !== employeeId) {
+          return employee;
+        }
+
+        return {
+          ...employee,
+          phaseId: nextPhaseId,
+          completedTaskIds: [],
+        };
+      }),
+    );
+  };
+
   useEffect(() => {
     saveEmployees(employees);
   }, [employees]);
@@ -93,6 +109,7 @@ export function OnboardingDashboard() {
             <EmployeeDetail
               employee={selectedEmployee}
               onToggleTask={handleToggleTask}
+              onChangePhase={handleChangePhase}
               onClose={() => setSelectedEmployeeId(null)}
             />
           </div>

@@ -6,17 +6,29 @@ import { formatDate } from "../../utils/formatDate";
 interface EmployeeDetailProps {
   employee: Employee;
   onToggleTask: (employeeId: string, taskId: string) => void;
+  onChangePhase: (employeeId: string, nextPhaseId: string) => void;
   onClose: () => void;
 }
 
 export function EmployeeDetail({
   employee,
   onToggleTask,
+  onChangePhase,
   onClose,
 }: EmployeeDetailProps) {
   const checklist = onboardingChecklists[employee.phaseId];
 
   const phase = onboardingPhases.find((phase) => phase.id === employee.phaseId);
+  const currentPhaseIndex = onboardingPhases.findIndex(
+    (phase) => phase.id === employee.phaseId,
+  );
+
+  const previousPhase = onboardingPhases[currentPhaseIndex - 1];
+  const nextPhase = onboardingPhases[currentPhaseIndex + 1];
+
+  const isChecklistCompleted = checklist.every((task) =>
+    employee.completedTaskIds.includes(task.id),
+  );
 
   return (
     <section className="relative rounded-3xl border border-primary-blue/10 bg-white/80 p-7 shadow-sm xl:sticky xl:top-8 xl:self-start">
@@ -57,6 +69,41 @@ export function EmployeeDetail({
               </span>
             </p>
           </div>
+        </div>
+      </div>
+      <div className="mb-8 flex flex-col gap-3 rounded-2xl bg-pearl-white p-4">
+        <p className="text-sm font-medium uppercase tracking-[0.18em] text-sky-blue">
+          Přesun mezi fázemi
+        </p>
+
+        <div className="flex flex-col gap-3">
+          {previousPhase && (
+            <button
+              type="button"
+              onClick={() => onChangePhase(employee.id, previousPhase.id)}
+              className="rounded-2xl border border-primary-blue/10 bg-white px-4 py-3 text-left text-base font-medium text-midnight-blue transition hover:border-primary-blue/30 hover:text-primary-blue"
+            >
+              ← Zpět do fáze: {previousPhase.title}
+            </button>
+          )}
+
+          {nextPhase && (
+            <button
+              type="button"
+              onClick={() => onChangePhase(employee.id, nextPhase.id)}
+              disabled={!isChecklistCompleted}
+              className="rounded-2xl bg-primary-blue px-4 py-3 text-left text-base font-medium text-white transition hover:bg-midnight-blue disabled:cursor-not-allowed disabled:bg-primary-blue/30"
+            >
+              → Posunout do fáze: {nextPhase.title}
+            </button>
+          )}
+
+          {nextPhase && !isChecklistCompleted && (
+            <p className="text-sm leading-6 text-midnight-blue/60">
+              Pro posun do další fáze musí být splněné všechny úkoly aktuálního
+              checklistu.
+            </p>
+          )}
         </div>
       </div>
       <div>
